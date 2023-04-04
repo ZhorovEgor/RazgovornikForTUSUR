@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Разговорник</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+</head>
+<body>
+
+<main>
+    <header th:replace="~{block/header :: header}"></header>
+
+    <div>
+        <th:block th:if="${#lists.isEmpty(wordsList)}">
+            <form class="container mt-5">
+                <label for="one">Русские слова:</label>
+                <select id="one">
+                    <option>Слов нет!</option>
+                </select>
+                <label for="two">Английское слова:</label>
+                <select id="two">
+                    <option>No words!</option>
+                </select>
+            </form>
+        </th:block>
+        <th:block th:if="${!#lists.isEmpty(wordsList)}">
+            <form class="container mt-5">
+                <label for="one1">Русские слова:</label>
+                <select id="one1">
+                    <option th:each="el : ${wordsList}" th:text="${el.getRussianWord()}"></option>
+                </select></br>
+                <label for="two1">Английские слова:</label>
+                <select class="mt-2" id="two1">
+                    <option th:each="el : ${wordsList}" th:text="${el.getEnglishWord()}"></option>
+                </select>
+            </form>
+        </th:block>
+    </div>
+
+    <table>
+        <tr>
+            <td>
+                <form method="GET" th:action="@{/razgovornik/create}">
+                    <button type="submit">Добавить слова</button>
+                </form>
+            </td>
+            <td>
+                <form method="GET" th:action="@{/razgovornik/deleteWord}">
+                    <button type="submit">Удалить слова</button>
+                </form>
+            </td>
+            <td>
+                <form method="GET" th:action="@{/razgovornik/update}">
+                    <button type="submit">Изменить слова</button>
+
+                </form>
+            </td>
+        </tr>
+    </table>
+
+</main>
+
+</body>
+</html>

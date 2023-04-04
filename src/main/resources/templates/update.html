@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменить слово</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+</head>
+<body>
+<header th:replace="~{block/header :: header}"></header>
+
+<div>
+    <th:block th:if="${#lists.isEmpty(wordsList)}">
+        <form class="container mt-5">
+            <label class="mb-2" for="noRusWord">Выбирите русское слово:</label>
+            <select>
+                <option id="noRusWord">Слов нет!</option>
+            </select>
+            <label class="mb-2" for="noEngWord">Выбирите английское слово:</label>
+            <select>
+                <option id="noEngWord">No words!</option>
+            </select>
+        </form>
+    </th:block>
+
+    <th:block th:if="${!#lists.isEmpty(wordsList)}">
+        <div class="container mt-5">
+            <div class="mt-5 mb-5">
+                <form id="form2">
+                    <label class="mb-2" for="russianSelectName">Выбирите слова для изменения:</label>
+                    <select name="russianSelectName">
+                        <option selected id="russianSelectName" th:value="${el.getRussianWord()}" th:each="el : ${wordsList}"
+                                th:text="${el.getRussianWord()}"></option>
+                    </select>
+                    <label class="mb-2" for="englishSelectName"></label>
+                    <select name="englishSelectName">
+                        <option selected id="englishSelectName" th:value="${el.getEnglishWord()}" th:each="el : ${wordsList}"
+                                th:text="${el.getEnglishWord()}"></option>
+                    </select>
+                    <button type="submit">Выбрать данные слова!</button>
+                </form>
+                <form method="post" id="form1">
+                    <label class="mb-2" for="rusEnterName">Введите изменённое слово</label>
+                    <input name="russianEnterName" id="rusEnterName" placeholder="Введите русское слово">
+
+                    <label class="mb-2" for="engEnterName">Введите изменённое слово</label>
+                    <input name="englishEnterName" id="engEnterName" placeholder="Введите английское слово">
+
+                    <button th:action="@{/razgovornik}" type="submit">Изменить слово</button>
+                </form>
+            </div>
+        </div>
+    </th:block>
+
+</div>
+
+<form method="GET" th:action="@{/razgovornik}">
+    <button>На главную</button>
+</form>
+
+</body>
+</html>

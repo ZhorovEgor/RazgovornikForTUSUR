@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Удаление слова из славоря</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+
+</head>
+<body>
+<header th:insert="block/header :: header"></header>
+<main>
+
+    <form method="post" th:action="@{/razgovornik/deleteWord}">
+<!--        <label class="mb-2" for="rusWord">Введите русское слово</label>-->
+<!--        <input name="rusWord" id="rusWord" placeholder="Введите русское слово">-->
+        <label for="engWord">Введите английское слово</label>
+        <input name="engWord" id="engWord" placeholder="Введите английское слово">
+        <button type="submit">Удалить слово</button>
+    </form>
+
+    <form method="GET" th:action="@{/razgovornik}">
+        <button>На главную</button>
+    </form>
+
+</main>
+
+</body>
+</html>
